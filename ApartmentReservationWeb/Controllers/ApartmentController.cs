@@ -1,4 +1,5 @@
-﻿using ApartmentReservationWeb.DB;
+﻿using ApartmentReservationWeb.Abstractions;
+using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models.ApartmentModel;
 using AutoMapper;
@@ -10,56 +11,50 @@ namespace ApartmentReservationWeb.Services
     [Route("[controller]")]
     public class ApartmentController : ControllerBase
     {
-        private readonly OccupancyContext _context;
-        private readonly IMapper _mapper;
-
-        public ApartmentController(OccupancyContext context, IMapper mapper)
+        private readonly IApartmentRepository _repository;
+        public ApartmentController(IApartmentRepository repository)
         {
-            _context = context;
-            _mapper = mapper;
+            _repository = repository;
         }
 
         [HttpPost("AddApartment")]
-        public int AddApartment(ApartmentInfoDto apartmentDto)
+        public ActionResult<int> AddApartment(ApartmentInfoDto apartmentInfoDto)
         {
-            if (_context.Apartments.Any(x => x.Latitude == apartmentDto.Latitude 
-                && x.Longitude == apartmentDto.Longitude && x.OwnerId == apartmentDto.OwnerId))
-                    throw new Exception("Apartment like this is already exist!");
-
-            var entity = _mapper.Map<ApartmentInfo>(apartmentDto);
-
-            _context.Add(entity);
-            _context.SaveChanges();
-
-            return entity.Id;
+            try
+            {
+                return Ok(_repository.AddApartment(apartmentInfoDto));
+            }
+            catch (Exception ex) { return StatusCode(409); }
         }
 
         [HttpGet("GetApartmentById")]
-        public ApartmentInfo? GetApartmentById(int id)
+        public ActionResult<ApartmentInfo?> GetApartmentById(int id)
         {
-            var apart = _context.Apartments.FirstOrDefault(x => x.Id == id);
-
-            return apart;
+            try
+            {
+                return Ok(_repository.GetApartmentById(id));
+            }
+            catch (Exception ex) { return StatusCode(409); }
         }
 
         [HttpDelete("RemoveApartment")]
-        public ApartmentInfo RemoveApartment(int id)
+        public ActionResult<ApartmentInfo> RemoveApartment(int id)
         {
-            var entity = _context.Apartments.FirstOrDefault(x => x.Id == id);
-
-            if (entity != null)
-                throw new Exception("No apartment like this!");
-
-            _context.Apartments.Remove(entity);
-            _context.SaveChanges();
-
-            return entity;
+            try
+            {
+                return Ok(_repository.RemoveApartment(id));
+            }
+            catch (Exception ex) { return StatusCode(409); }
         }
 
         [HttpGet("GetAllApartments")]
-        public IEnumerable<ApartmentInfo> GetAllApartments()
+        public ActionResult<IEnumerable<ApartmentInfo>> GetAllApartments()
         {
-            return _context.Apartments.AsEnumerable();
+            try
+            {
+                return Ok(_repository.GetAllApartments());
+            }
+            catch (Exception ex) { return StatusCode(409); }
         }
     }
 }

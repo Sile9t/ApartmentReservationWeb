@@ -18,5 +18,6 @@ namespace ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel
         public virtual Review Review { get; set; }
         public int GuestesCount { get; set; }
         public double TotalCost { get; set; }
+        public List<ReservationDate> Dates { get; set; }
     }
 }

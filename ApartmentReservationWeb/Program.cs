@@ -15,8 +15,6 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer( builder
     .Configuration.GetConnectionString("db")).UseLazyLoadingProxies().LogTo(Console.WriteLine));
-//builder.Services.AddScoped<ApartmentController>();
-//builder.Services.AddScoped<UserController>();
 
 var app = builder.Build();
 

@@ -142,3 +142,4 @@ C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ApartmentReservationWeb.pdb
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ApartmentReservationWeb.genruntimeconfig.cache
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ref\ApartmentReservationWeb.dll
+C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ApartmentReservationWeb.sourcelink.json
