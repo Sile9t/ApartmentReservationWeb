@@ -1,3 +1,4 @@
+using ApartmentReservationWeb.Abstractions;
 using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Mapper;
 using ApartmentReservationWeb.Services;
@@ -15,6 +16,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer( builder
     .Configuration.GetConnectionString("db")).UseLazyLoadingProxies().LogTo(Console.WriteLine));
+builder.Services.AddSingleton<IApartmentRepository, ApartmentRepository>();
 
 var app = builder.Build();
 
