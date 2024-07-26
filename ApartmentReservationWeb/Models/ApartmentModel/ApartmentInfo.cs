@@ -28,5 +28,6 @@ namespace ApartmentReservationWeb.Models.ApartmentModel
         public virtual int? FacilitiesInfoId { get; set; }
         public virtual ApartFacilities? FacilitiesInfo { get; set; }
         public virtual List<Occupancy> Occupancies { get; set; }
+        public virtual List<ReservationDate> Dates { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace ApartmentReservationWeb.DB
         public DbSet<User> Users { get; set; }
         public DbSet<ApartmentInfo> Apartments { get; set; }
         public DbSet<Occupancy> Occupancies { get; set; }
+        public DbSet<ReservationDate> ReservationDates { get; set; }
 
         public OccupancyContext(DbContextOptions<OccupancyContext> optBuilder) 
             : base(optBuilder) 
@@ -20,7 +21,7 @@ namespace ApartmentReservationWeb.DB
         {
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("users");
+                entity.ToTable("Users");
                 entity.HasKey(x => x.Id);
 
                 entity.HasMany(x => x.Apartments)
@@ -42,6 +43,19 @@ namespace ApartmentReservationWeb.DB
                 entity.HasOne(x => x.Apartment)
                     .WithMany(x => x.Occupancies)
                     .HasForeignKey(x => x.ApartmentId);
+            });
+
+            modelBuilder.Entity<ReservationDate>(entity =>
+            {
+                entity.ToTable("ReservationDates");
+                entity.HasKey(x => x.Id);
+
+                entity.HasOne(x => x.Apartment)
+                    .WithMany(x => x.Dates)
+                    .HasForeignKey(x => x.ApartmentId);
+                entity.HasOne(x => x.Occupancy)
+                    .WithMany(x => x.Dates)
+                    .HasForeignKey(x => x.OccupancyId);
             });
         }
     }

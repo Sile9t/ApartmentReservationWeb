@@ -14,6 +14,7 @@
           "Microsoft.EntityFrameworkCore.Design": "8.0.7",
           "Microsoft.EntityFrameworkCore.Proxies": "8.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.7",
+          "Microsoft.EntityFrameworkCore.Tools": "8.0.7",
           "Swashbuckle.AspNetCore.Swagger": "6.6.2",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.6.2",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.6.2"
@@ -449,6 +450,11 @@
             "assemblyVersion": "8.0.7.0",
             "fileVersion": "8.0.724.31404"
           }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Tools/8.0.7": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "8.0.7"
         }
       },
       "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
@@ -1085,6 +1091,13 @@
       "sha512": "sha512-6gwbwmXkCb+IGxTQ81KqwGjN15r3bv7PLlb4Ox/cYDqdPFbHXMsk0zgtKyPCiXqkFH2LG7KpvVYUBlu4PyTKZQ==",
       "path": "microsoft.entityframeworkcore.sqlserver/8.0.7",
       "hashPath": "microsoft.entityframeworkcore.sqlserver.8.0.7.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Tools/8.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i85BNsjYGjAkvvga9uALKREHq/hsp/y7QOGuliczDSnUN6YIQXgx989XBg8iSkb5tZJqU/NLev1mU4XmirAvOw==",
+      "path": "microsoft.entityframeworkcore.tools/8.0.7",
+      "hashPath": "microsoft.entityframeworkcore.tools.8.0.7.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
       "type": "package",
