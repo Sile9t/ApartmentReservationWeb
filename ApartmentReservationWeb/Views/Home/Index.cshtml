@@ -1,8 +1,28 @@
-﻿@{
+﻿@using ApartmentReservationWeb.Controllers;
+@model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="apartmentsList">
+    @foreach(var apart in Model)
+    {
+        <div class="apartmentCard">
+            <img src="@apart.Photos"/>
+            <p>@apart.Name</p>
+            <p>@apart.Address</p>
+            <p>@apart.Description</p>
+            <p>@apart.RoomsCount, @apart.BedsCount, @apart.GuestsCount</p>
+            <div class="apartmentCardFooter">
+                <p>@apart.Cost</p>
+                <div class="apartmentRateAndReviewsCount">
+                    <p>@apart.Rate</p>
+                    <p>@apart.Reviews.Count</p>
+                </div>
+            </div>
+        </div>
+    }
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

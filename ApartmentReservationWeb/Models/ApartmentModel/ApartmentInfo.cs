@@ -6,7 +6,7 @@ namespace ApartmentReservationWeb.Models.ApartmentModel
     public class ApartmentInfo
     {
         public int Id { get; set; }
-        public List<byte[]> Photos { get; set; }
+        public List<byte> Photos { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public double Longitude { get; set; }
