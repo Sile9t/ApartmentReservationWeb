@@ -13,8 +13,9 @@ namespace ApartmentReservationWeb.Abstractions
         private readonly IMapper _mapper;
         private readonly IMemoryCache _cache;
 
-        public ApartmentRepository(IMapper mapper, IMemoryCache cache)
+        public ApartmentRepository(OccupancyContext context, IMapper mapper, IMemoryCache cache)
         {
+            _context = context;
             _mapper = mapper;
             _cache = cache;
         }

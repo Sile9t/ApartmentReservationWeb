@@ -42,7 +42,19 @@ namespace ApartmentReservationWeb.DB
 
                 entity.HasOne(x => x.Apartment)
                     .WithMany(x => x.Occupancies)
-                    .HasForeignKey(x => x.ApartmentId);
+                    .HasForeignKey(x => x.ApartmentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.ReservedBy)
+                    .WithMany(x => x.Occupancies)
+                    .HasForeignKey(x => x.ReservedById)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.State)
+                    .WithMany(x => x.Occupancies)
+                    .HasForeignKey(x => x.OccupancyStateId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(x => x.Review)
+                    .WithOne(x => x.Occupancy)
+                    .HasForeignKey<Occupancy>(x => x.ReviewId);
             });
 
             modelBuilder.Entity<ReservationDate>(entity =>
@@ -52,10 +64,12 @@ namespace ApartmentReservationWeb.DB
 
                 entity.HasOne(x => x.Apartment)
                     .WithMany(x => x.Dates)
-                    .HasForeignKey(x => x.ApartmentId);
+                    .HasForeignKey(x => x.ApartmentId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(x => x.Occupancy)
                     .WithMany(x => x.Dates)
-                    .HasForeignKey(x => x.OccupancyId);
+                    .HasForeignKey(x => x.OccupancyId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

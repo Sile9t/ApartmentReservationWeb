@@ -1,12 +1,14 @@
 ﻿@using ApartmentReservationWeb.Controllers;
+@using ApartmentReservationWeb.Models.ApartmentModel
 @model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
 
 @{
     ViewData["Title"] = "Home Page";
+    var apartList = (IEnumerable<ApartmentInfo>?)ViewData["apartmentList"];
 }
 
 <div class="apartmentsList">
-    @foreach(var apart in Model)
+    @foreach(var apart in apartList)
     {
         <div class="apartmentCard">
             <img src="@apart.Photos"/>

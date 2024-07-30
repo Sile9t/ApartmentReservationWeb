@@ -1,4 +1,5 @@
-﻿using ApartmentReservationWeb.Models.UserModel;
+﻿using ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel;
+using ApartmentReservationWeb.Models.UserModel;
 
 namespace ApartmentReservationWeb.Models.ApartmentModel
 {
@@ -9,5 +10,6 @@ namespace ApartmentReservationWeb.Models.ApartmentModel
         public string? Message { get; set; }
         public string? Answer { get; set; }
         public virtual int OccupancyId { get; set; }
+        public virtual Occupancy Occupancy { get; set; }
     }
 }

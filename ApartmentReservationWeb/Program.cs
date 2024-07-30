@@ -16,7 +16,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer( builder
     .Configuration.GetConnectionString("db")).UseLazyLoadingProxies().LogTo(Console.WriteLine));
-builder.Services.AddSingleton<IApartmentRepository, ApartmentRepository>();
+builder.Services.AddScoped<IApartmentRepository, ApartmentRepository>();
 
 var app = builder.Build();
 
@@ -37,7 +37,7 @@ if (true)
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Home}/{action=Main}/{id?}");
 
 }
 
