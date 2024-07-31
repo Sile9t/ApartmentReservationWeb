@@ -1,0 +1,40 @@
+﻿@using ApartmentReservationWeb.Controllers;
+@using ApartmentReservationWeb.Models.ApartmentModel
+@model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
+
+@{
+    ViewData["Title"] = "Apartments Page";
+    var apartList = (IEnumerable<ApartmentInfo>?)ViewData["apartmentList"];
+}
+<div class="apartmentsPageBody">
+    <div class="apartmentsPageHeader">
+        <button class="filterBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+                <path fill="darkgrey" stroke="black" stroke-width="3" d="M3.9 54.9C10.5 40.9 24.5
+                     32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320
+                     448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.
+                    8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
+            </svg>
+        </button>
+    </div>
+        <hr />
+    <div class="apartmentsList">
+        @foreach(var apart in apartList)
+        {
+            <div class="apartmentCard">
+                <img src="@apart.Photos"/>
+                <p>@apart.Name</p>
+                <p>@apart.Address</p>
+                <p>@apart.Description</p>
+                <p>@apart.RoomsCount, @apart.BedsCount, @apart.GuestsCount</p>
+                <div class="apartmentCardFooter">
+                    <p>@apart.Cost</p>
+                    <div class="apartmentRateAndReviewsCount">
+                        <p>@apart.Rate</p>
+                        <p>@apart.Reviews.Count</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
