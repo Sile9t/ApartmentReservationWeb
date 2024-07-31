@@ -1,14 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Main Page";
 }
-<div class="mainPageBody">
+<div class="main-page-body">
     <h1 class="display-4">Main Page</h1>
-    <div class="searchInput">
+    <div class="search-input">
         <input type="text" name="location" value="Enter search location" title="Enter search location" />
         Occupancy:
         <input type="date" name="occupancyDate" title="Enter occupancy date"/>
         Eviction:
         <input type="date" name="evictionDate" title="Enter eviction date"/>
-        <button class="searchBtn" asp-controller="Home" asp-action="Apartments">Search</button>
+        <button class="search-btn" asp-controller="Home" asp-action="Apartments">Search</button>
     </div>
 </div>
