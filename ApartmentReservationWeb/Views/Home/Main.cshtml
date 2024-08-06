@@ -4,11 +4,11 @@
 <div class="main-page-body">
     <h1 class="display-4">Main Page</h1>
     <div class="search-input">
-        <input type="text" name="location" value="Enter search location" title="Enter search location" />
+        <input class="border-0 border-bottom" type="text" name="location" value="Enter search location" title="Enter search location" />
         Occupancy:
-        <input type="date" name="occupancyDate" title="Enter occupancy date"/>
+        <input  class="border-0 border-bottom" type="date" name="occupancyDate" title="Enter occupancy date"/>
         Eviction:
-        <input type="date" name="evictionDate" title="Enter eviction date"/>
-        <button class="search-btn" asp-controller="Home" asp-action="Apartments">Search</button>
+        <input class="border-0 border-bottom" type="date" name="evictionDate" title="Enter eviction date"/>
+        <a class="btn-link text-dark text-decoration-none" asp-area="" asp-controller="Home" asp-action="Apartments">Search</a>
     </div>
 </div>

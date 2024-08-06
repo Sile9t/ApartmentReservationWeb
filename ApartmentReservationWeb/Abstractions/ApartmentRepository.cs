@@ -49,6 +49,19 @@ namespace ApartmentReservationWeb.Abstractions
             return list;
         }
 
+        public IEnumerable<ApartmentInfo> GetApartmentsByOwner(int id)
+        {
+            if (_cache.TryGetValue("userApartments", out List<ApartmentInfo> list))
+                return list;
+
+            list = _context.Apartments.Select(_mapper.Map<ApartmentInfo>)
+                .Where(x => x.OwnerId == id).ToList();
+
+            _cache.Set("userApartments", list, TimeSpan.FromMinutes(30));
+
+            return null;
+        }
+
         public ApartmentInfo GetApartmentById(int id)
         {
             ApartmentInfo apartment;

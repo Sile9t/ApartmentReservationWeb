@@ -27,6 +27,12 @@ namespace ApartmentReservationWeb.Controllers
             return View();
         }
 
+        public IActionResult MyApartments(int id = 0)
+        {
+            ViewData["apartmentsList"] = _apartmentRepository.GetApartmentsByOwner(id);
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

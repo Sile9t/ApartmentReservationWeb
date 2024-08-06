@@ -1,0 +1,40 @@
+﻿@using ApartmentReservationWeb.Models.ApartmentModel;
+@model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
+
+@{
+    ViewData["Title"] = "My apartments list";
+    var userAparts = ViewData["UserApartments"];
+}
+
+<h1>My apartments list:</h1>
+
+<p>
+    <a asp-action="Create">Create</a>
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Photos)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Cost)</th>
+            <th>@Html.DisplayNameFor(model => model.Rate)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var apart in userAparts) {
+            <tr>
+                <td>@Html.DisplayFor(apart => apart.Photos)</td>
+                <td>@Html.DisplayFor(apart => apart.Name)</td>
+                <td>@Html.DisplayFor(apart => apart.Address)</td>
+                <td>@Html.DisplayFor(apart => apart.Cost)</td>
+                <td>@Html.DisplayFor(apart => apart.Rate)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@apart.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@apart.Id">Details</a>
+                    <a asp-action="Remove" asp-route-id="@apart.Id">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

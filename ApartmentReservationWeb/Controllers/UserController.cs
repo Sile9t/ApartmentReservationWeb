@@ -39,6 +39,11 @@ namespace ApartmentReservationWeb.Services
             return _mapper.Map<UserDto>(user);
         }
 
+        public bool IsUserExists(int id)
+        {
+            return _context.Users.Any(user => user.Id == id);
+        }
+
         public UserDto RemoveUser(int id)
         {
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
