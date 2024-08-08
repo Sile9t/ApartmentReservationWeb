@@ -9,10 +9,10 @@ namespace ApartmentReservationWeb.Services
 {
     [ApiController]
     [Route("[controller]")]
-    public class ApartmentController : ControllerBase
+    public class ApartmentService : ControllerBase
     {
         private readonly IApartmentRepository _repository;
-        public ApartmentController(IApartmentRepository repository)
+        public ApartmentService(IApartmentRepository repository)
         {
             _repository = repository;
         }

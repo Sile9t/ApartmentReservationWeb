@@ -18,13 +18,7 @@ namespace ApartmentReservationWeb.Controllers
 
         public IActionResult Main()
         {
-            return View();
-        }
-
-        public IActionResult Apartments()
-        {
-            ViewData["apartmentList"] = _apartmentRepository.GetAllApartments();
-            return View();
+               return View();
         }
 
         public IActionResult MyApartments(int id = 0)

@@ -5,12 +5,12 @@ using AutoMapper;
 
 namespace ApartmentReservationWeb.Services
 {
-    public class OccupancyController
+    public class OccupancyService
     {
         private readonly OccupancyContext _context;
         private readonly IMapper _mapper;
 
-        public OccupancyController(OccupancyContext context, IMapper mapper)
+        public OccupancyService(OccupancyContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
