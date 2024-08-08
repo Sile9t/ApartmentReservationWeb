@@ -22,8 +22,6 @@ namespace ApartmentReservationWeb.Abstractions
 
         public int AddApartment(ApartmentInfoDto apartmentInfoDto)
         {
-
-
             if (_context.Apartments.Any(x => x.Latitude == apartmentInfoDto.Latitude
                 && x.Longitude == apartmentInfoDto.Longitude && x.OwnerId == apartmentInfoDto.OwnerId))
                 throw new Exception("Apartment like this is already exist!");

@@ -1,17 +1,17 @@
 ﻿@using ApartmentReservationWeb.Models.ApartmentModel;
-@model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
+@model IEnumerable<ApartmentInfo>;
 
 @{
     ViewData["Title"] = "My apartments list";
-    var userAparts = ViewData["UserApartments"];
+    var userAparts = (IEnumerable<ApartmentInfo>?)ViewData["UserApartments"];
 }
 
 <h1>My apartments list:</h1>
 
 <p>
-    <a asp-action="Create">Create</a>
+    <a class="btn-link" asp-action="Create">Create</a>
 </p>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Photos)</th>
@@ -22,17 +22,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var apart in userAparts) {
+        @foreach(var apart in userAparts ?? Enumerable.Empty<ApartmentInfo>()) {
             <tr>
-                <td>@Html.DisplayFor(apart => apart.Photos)</td>
-                <td>@Html.DisplayFor(apart => apart.Name)</td>
-                <td>@Html.DisplayFor(apart => apart.Address)</td>
-                <td>@Html.DisplayFor(apart => apart.Cost)</td>
-                <td>@Html.DisplayFor(apart => apart.Rate)</td>
+                <td>@Html.DisplayFor(apartProp => apart.Photos)</td>
+                <td>@Html.DisplayFor(apartProp => apart.Name)</td>
+                <td>@Html.DisplayFor(apartProp => apart.Address)</td>
+                <td>@Html.DisplayFor(apartProp => apart.Cost)</td>
+                <td>@Html.DisplayFor(apartProp => apart.Rate)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@apart.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@apart.Id">Details</a>
-                    <a asp-action="Remove" asp-route-id="@apart.Id">Remove</a>
+                    <a class="btn-link" asp-action="Edit" asp-route-id="@apart.Id">Edit</a>
+                    <a class="btn-link" asp-action="Details" asp-route-id="@apart.Id">Details</a>
+                    <a class="btn-link" asp-action="Remove" asp-route-id="@apart.Id">Remove</a>
                 </td>
             </tr>
         }

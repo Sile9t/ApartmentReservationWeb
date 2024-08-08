@@ -1,6 +1,6 @@
 ﻿@using ApartmentReservationWeb.Controllers;
 @using ApartmentReservationWeb.Models.ApartmentModel
-@model IEnumerable<ApartmentReservationWeb.Models.ApartmentModel.ApartmentInfo>;
+@model IEnumerable<ApartmentInfo>;
 
 @{
     ViewData["Title"] = "Apartments Page";
@@ -23,7 +23,7 @@
     <div class="container apartments-list flex-wrap">
         @foreach(var apart in apartList)
         {
-            <div class="container apartment-card">
+            <div class="container apartment-card" value="@apart.Id">
                 <img src="@apart.Photos"/>
                 <p class="apartment-name">@apart.Name</p>
                 <p class="apartment-address">@apart.Address</p>
