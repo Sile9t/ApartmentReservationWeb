@@ -11,6 +11,7 @@ namespace ApartmentReservationWeb.Mapper
         {
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<ApartmentInfoDto, ApartmentInfo>().ReverseMap();
+            CreateMap<ReservationDateDto, ReservationDate>().ReverseMap();
         }
     }
 }
