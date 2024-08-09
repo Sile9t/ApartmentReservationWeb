@@ -6,7 +6,6 @@ namespace ApartmentReservationWeb.Services
 {
     public class DateService
     {
-
         private readonly IDateRepository _repository;
         public DateService(IDateRepository repository)
         {
