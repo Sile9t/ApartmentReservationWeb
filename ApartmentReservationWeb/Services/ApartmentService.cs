@@ -56,5 +56,7 @@ namespace ApartmentReservationWeb.Services
             }
             catch (Exception ex) { return StatusCode(409); }
         }
+
+        //To do: data validation
     }
 }

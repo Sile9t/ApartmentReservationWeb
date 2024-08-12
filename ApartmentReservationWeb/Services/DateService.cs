@@ -31,5 +31,7 @@ namespace ApartmentReservationWeb.Services
         {
             return _repository.RemoveDate(id);
         }
+
+        //Do to: data validation, exception catching
     }
 }

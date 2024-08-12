@@ -14,9 +14,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
+
 builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer( builder
     .Configuration.GetConnectionString("db")).UseLazyLoadingProxies().LogTo(Console.WriteLine));
+
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<UserService>();
+
 builder.Services.AddTransient<IApartmentRepository, ApartmentRepository>();
+builder.Services.AddTransient<ApartmentService>();
+
+builder.Services.AddTransient<IDateRepository, DateRepository>();
+builder.Services.AddTransient<DateService>();
 
 var app = builder.Build();
 
