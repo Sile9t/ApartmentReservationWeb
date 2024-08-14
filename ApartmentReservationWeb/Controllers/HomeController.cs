@@ -16,6 +16,11 @@ namespace ApartmentReservationWeb.Controllers
             _apartmentRepository = apartmentRepository;
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public IActionResult Main()
         {
                return View();

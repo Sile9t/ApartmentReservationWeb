@@ -1,74 +1,74 @@
-﻿using ApartmentReservationWeb.DB;
+﻿using ApartmentReservationWeb.Abstractions;
+using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models.UserModel;
+using ApartmentReservationWeb.RSATools;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace ApartmentReservationWeb.Services
 {
     public class UserService
     {
-        private readonly OccupancyContext _context;
+        private readonly IUserRepository _repository;
+        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public UserService(OccupancyContext context, IMapper mapper)
+        public UserService(IUserRepository repository, IConfiguration configuration, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
+            _configuration = configuration;
             _mapper = mapper;
         }
 
         public int AddUser(UserDto userDto)
         {
-            if (_context.Users.Any(x => x.Phone == userDto.Phone))
-                throw new Exception("User with this phone number already exist!");
-
-            var entity = _mapper.Map<User>(userDto);
-
-            _context.Users.Add(entity);
-            _context.SaveChanges();
-
-            return entity.Id;
+            return _repository.AddUser(userDto);
         }
 
         public UserDto GetUserByPhone(string phone)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Phone == phone);
-
-            if (user == null)
-                throw new Exception("User with this phone number not exist!");
-
-            return _mapper.Map<UserDto>(user);
-        }
-
-        public bool IsUserExists(int id)
-        {
-            return _context.Users.Any(user => user.Id == id);
+            return _repository.GetUser(0);
         }
 
         public UserDto RemoveUser(int id)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Id == id);
-
-            if (user == null)
-                throw new Exception("User with this phone number not exist!");
-
-            _context.Users.Remove(user);
-            _context.SaveChanges();
-
-            return _mapper.Map<UserDto>(user);
+            return _repository.RemoveUser(id);
         }
 
-        public bool UpdateUser(UserDto userDto, int id)
+        public int UpdateUser(UserDto userDto)
         {
-            if (!_context.Users.Any(x => x.Id == id))
-                throw new Exception("No user like this");
+            return _repository.UpdateUser(userDto);
+        }
 
-            var user = _mapper.Map<User>(userDto);
-            user.Id = id;
+        public RoleId CheckUser(LoginDto loginDto)
+        {
+            return _repository.CheckUser(loginDto);
+        }
 
-            _context.Update(user);
-            _context.SaveChanges();
+        //To do: Login(LoginDto)
 
-            return true;
+        private string GenerateToken(UserDto userDto)
+        {
+            var securityKey = new RsaSecurityKey(RSAExtensions.GetPrivateKey());
+
+            var credentials = new SigningCredentials(securityKey,
+                 SecurityAlgorithms.RsaSha512Signature);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.MobilePhone, userDto.Phone),
+                new Claim(ClaimTypes.Role, userDto.Role.ToString())
+            };
+
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(15),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

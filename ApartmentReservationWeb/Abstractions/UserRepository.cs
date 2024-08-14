@@ -30,6 +30,11 @@ namespace ApartmentReservationWeb.Abstractions
             return entity.Id;
         }
 
+        public RoleId CheckUser(LoginDto loginDto)
+        {
+            throw new NotImplementedException();
+        }
+
         public UserDto GetUser(int id)
         {
             if (!_context.Users.Any(x => x.Id == id))

@@ -7,16 +7,19 @@ namespace ApartmentReservationWeb.Controllers
     {
         private readonly ILogger<CalendarController> _logger;
         private readonly IDateRepository _repository;
-
-        public CalendarController(ILogger<CalendarController> logger, IDateRepository repository)
+        private readonly IApartmentRepository _apartRepo;
+        public CalendarController(ILogger<CalendarController> logger,
+            IDateRepository repository, IApartmentRepository apartRepo)
         {
             _logger = logger;
             _repository = repository;
+            _apartRepo = apartRepo;
         }
 
-        public IActionResult Main()
+        public IActionResult Main(int userId = 0)
         {
-            ViewData["CalendarDates"] = _repository.GetAllDates();
+            ViewData["aparts"] = _apartRepo.GetApartmentsByOwner(userId);
+            ViewData["calendarDates"] = _repository.GetAllDates();
             return View();
         }
     }

@@ -21,7 +21,7 @@
     </div>
         <hr />
     <div class="container apartments-list flex-wrap">
-        @foreach(var apart in apartList)
+        @foreach(var apart in apartList ?? Enumerable.Empty<ApartmentInfo>())
         {
             <div class="container apartment-card" value="@apart.Id">
                 <img src="@apart.Photos"/>

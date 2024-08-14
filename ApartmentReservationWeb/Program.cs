@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var dbConnect = builder.Configuration["ConnectionStrings:db"];
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -15,8 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 
-builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer( builder
-    .Configuration.GetConnectionString("db")).UseLazyLoadingProxies().LogTo(Console.WriteLine));
+builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer(
+    dbConnect).UseLazyLoadingProxies().LogTo(Console.WriteLine));
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<UserService>();
@@ -46,7 +48,7 @@ if (true)
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Main}/{id?}");
+        pattern: "{controller=Home}/{action=Login}/{id?}");
 
 }
 

@@ -3,8 +3,9 @@
 
 @{
     ViewData["Title"] = "Calendar Page";
-    var reservedDates = (IEnumerable<ReservationDate>)ViewData["CalendarDates"];
+    var reservedDates = (IEnumerable<ReservationDate>?)ViewData["calendarDates"];
     var calendarDates = Enumerable.Range(0, 40).Select(offset => DateTime.Now.AddDays(offset)).ToArray();
+    var userAparts = (IEnumerable<ApartmentInfo>?)ViewData["aparts"];
 }
 
 <div class="table-responsive">
@@ -19,21 +20,25 @@
             </tr>
         </thead>
         <tbody>
-            @* To do: get user aparts list for viewing them in table and theirs reserved dates *@
-            <tr>
-
-                @foreach (var date in calendarDates ?? Enumerable.Empty<DateTime>())
-                {
-                    if (reservedDates.Any(x => x.Date == DateOnly.Parse(date.ToString())))
+            @* To do: make first column of table sticky *@
+            @foreach (var apart in userAparts ?? Enumerable.Empty<ApartmentInfo>())
+            {
+                <tr>
+                    <td class="position-sticky">@apart.Photos</td>
+                    @foreach (var date in calendarDates ?? Enumerable.Empty<DateTime>())
                     {
-                        <td>Reserved</td>
+                        if (reservedDates.Any(x => x.ApartmentId == apart.Id 
+                            && x.Date == DateOnly.Parse(date.ToString())))
+                        {
+                            <td>Reserved</td>
+                        }
+                        else
+                        {
+                            <td>Empty</td>
+                        }
                     }
-                    else
-                    {
-                        <td>Empty</td>
-                    }
-                }
-            </tr>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

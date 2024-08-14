@@ -20,3 +20,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.table th:first-child, .table td:first-child{
+    position: sticky;
+}
+
+.login {
+    min-height: 80vh;
+}

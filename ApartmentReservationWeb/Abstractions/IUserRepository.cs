@@ -9,5 +9,6 @@ namespace ApartmentReservationWeb.Abstractions
         UserDto GetUser(int id);
         int UpdateUser(UserDto userDto);
         UserDto RemoveUser(int id);
+        RoleId CheckUser(LoginDto loginDto);
     }
 }
