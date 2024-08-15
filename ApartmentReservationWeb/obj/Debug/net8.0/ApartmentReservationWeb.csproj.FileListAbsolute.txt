@@ -143,3 +143,4 @@ C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ApartmentReservationWeb.genruntimeconfig.cache
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ref\ApartmentReservationWeb.dll
 C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\obj\Debug\net8.0\ApartmentReservationWeb.sourcelink.json
+C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

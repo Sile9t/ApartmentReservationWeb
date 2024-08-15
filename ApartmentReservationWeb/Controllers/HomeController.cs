@@ -2,6 +2,7 @@ using ApartmentReservationWeb.Abstractions;
 using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models;
 using ApartmentReservationWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,6 +23,7 @@ namespace ApartmentReservationWeb.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Login([Bind("Phone, Password")] LoginDto loginDto)
         {
             var userId = _userService.CheckUser(loginDto, out int? Id);
@@ -29,27 +31,28 @@ namespace ApartmentReservationWeb.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Main()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult MyApartments([FromBody] int? id = null)
         {
-            if (id == null)
-                View();
-
             ViewData["apartmentsList"] = _apartmentService.GetApartmentsByOwnerId(id);
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
