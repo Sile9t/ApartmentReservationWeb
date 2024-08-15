@@ -18,7 +18,7 @@ namespace ApartmentReservationWeb.Controllers
 
         public IActionResult Main(int userId = 0)
         {
-            ViewData["aparts"] = _apartRepo.GetApartmentsByOwner(userId);
+            ViewData["aparts"] = _apartRepo.GetApartmentsByOwnerId(userId);
             ViewData["calendarDates"] = _repository.GetAllDates();
             return View();
         }

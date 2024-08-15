@@ -1,8 +1,11 @@
-﻿@{
+﻿@model ApartmentReservationWeb.Models.UserModel.User
+
+@{
     ViewData["Title"] = "Main Page";
 }
 
 <div class="main-page-body">
+    <input type="hidden" asp-for="@Model.Id"/>
     <h1 class="display-4">Main Page</h1>
     <div class="search-input">
         <input class="border-0 border-bottom" type="text" name="location" value="Enter search location" title="Enter search location" />

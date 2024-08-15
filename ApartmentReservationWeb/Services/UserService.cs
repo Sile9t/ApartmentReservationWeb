@@ -1,9 +1,7 @@
 ﻿using ApartmentReservationWeb.Abstractions;
-using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models.UserModel;
 using ApartmentReservationWeb.RSATools;
-using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,14 +12,14 @@ namespace ApartmentReservationWeb.Services
     {
         private readonly IUserRepository _repository;
         private readonly IConfiguration _configuration;
-        private readonly IMapper _mapper;
-
-        public UserService(IUserRepository repository, IConfiguration configuration, IMapper mapper)
+        
+        public UserService(IUserRepository repository, IConfiguration configuration)
         {
             _repository = repository;
             _configuration = configuration;
-            _mapper = mapper;
         }
+
+        //To do: AddAdmin(LoginDto), AddUser(LoginDto), UpdateToken(UserDto)
 
         public int AddUser(UserDto userDto)
         {
@@ -43,9 +41,9 @@ namespace ApartmentReservationWeb.Services
             return _repository.UpdateUser(userDto);
         }
 
-        public RoleId CheckUser(LoginDto loginDto)
+        public RoleId CheckUser(LoginDto loginDto, out int? Id)
         {
-            return _repository.CheckUser(loginDto);
+            return _repository.CheckUser(loginDto, out Id);
         }
 
         //To do: Login(LoginDto)

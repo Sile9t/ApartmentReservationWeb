@@ -30,9 +30,19 @@ namespace ApartmentReservationWeb.Abstractions
             return entity.Id;
         }
 
-        public RoleId CheckUser(LoginDto loginDto)
+        public RoleId CheckUser(LoginDto loginDto, out int? Id)
         {
-            throw new NotImplementedException();
+            if (!_context.Users.Any(x => x.Phone == loginDto.Phone))
+                throw new Exception("No user like this!");
+
+            var user = _context.Users.FirstOrDefault(_mapper.Map<User>(loginDto));
+
+            if (user == null)
+                throw new Exception("Wrong password!");
+
+            Id = user.Id;
+
+            return user.RoleId;
         }
 
         public UserDto GetUser(int id)
@@ -50,7 +60,7 @@ namespace ApartmentReservationWeb.Abstractions
 
         public UserDto RemoveUser(int id)
         {
-            if (_context.Users.Any(x => x.Id == id))
+            if (!_context.Users.Any(x => x.Id == id))
                 throw new Exception("User doesn't exists!");
 
             var user = _context.Users.FirstOrDefault(x => x.Id == id);

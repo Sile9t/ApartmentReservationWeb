@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApartmentReservationWeb.Services
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ApartmentService : ControllerBase
+    public class ApartmentService
     {
         private readonly IApartmentRepository _repository;
         public ApartmentService(IApartmentRepository repository)
@@ -17,44 +15,31 @@ namespace ApartmentReservationWeb.Services
             _repository = repository;
         }
 
-        [HttpPost("AddApartment")]
-        public ActionResult<int> AddApartment(ApartmentInfoDto apartmentInfoDto)
+        public int AddApartment(ApartmentInfoDto apartmentInfoDto)
         {
-            try
-            {
-                return Ok(_repository.AddApartment(apartmentInfoDto));
-            }
-            catch (Exception ex) { return StatusCode(409); }
+            return _repository.AddApartment(apartmentInfoDto);
         }
 
-        [HttpGet("GetApartmentById")]
-        public ActionResult<ApartmentInfo?> GetApartmentById(int id)
+        public ApartmentInfo? GetApartmentById(int id)
         {
-            try
-            {
-                return Ok(_repository.GetApartmentById(id));
-            }
-            catch (Exception ex) { return StatusCode(409); }
+            return _repository.GetApartmentById(id);
         }
 
-        [HttpDelete("RemoveApartment")]
-        public ActionResult<ApartmentInfo> RemoveApartment(int id)
+        public ApartmentInfo RemoveApartment(int id)
         {
-            try
-            {
-                return Ok(_repository.RemoveApartment(id));
-            }
-            catch (Exception ex) { return StatusCode(409); }
+            return _repository.RemoveApartment(id);
         }
 
-        [HttpGet("GetAllApartments")]
-        public ActionResult<IEnumerable<ApartmentInfo>> GetAllApartments()
+        public IEnumerable<ApartmentInfo> GetApartmentsByOwnerId(int? id)
         {
-            try
-            {
-                return Ok(_repository.GetAllApartments());
-            }
-            catch (Exception ex) { return StatusCode(409); }
+            if (id == null) return Enumerable.Empty<ApartmentInfo>();
+
+            return _repository.GetApartmentsByOwnerId(id);
+        }
+
+        public IEnumerable<ApartmentInfo> GetAllApartments()
+        {
+            return _repository.GetAllApartments();
         }
 
         //To do: data validation

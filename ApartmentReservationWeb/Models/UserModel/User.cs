@@ -1,5 +1,4 @@
-﻿using ApartmentReservationWeb.Abstractions;
-using ApartmentReservationWeb.Models.ApartmentModel;
+﻿using ApartmentReservationWeb.Models.ApartmentModel;
 using ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel;
 
 namespace ApartmentReservationWeb.Models.UserModel
@@ -18,8 +17,8 @@ namespace ApartmentReservationWeb.Models.UserModel
         public string Languages { get; set; }
         public byte[] Photo { get; set; }
         public virtual List<ApartmentInfo>? Apartments { get; set; }
-        public virtual int ApartmentRulesId { get; set; }
+        public virtual int? ApartmentRulesId { get; set; }
         public virtual ApartmentRules? Rules { get; set; }
-        public virtual List<Occupancy> Occupancies { get; set; }
+        public virtual List<Occupancy>? Occupancies { get; set; }
     }
 }

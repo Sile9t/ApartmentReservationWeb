@@ -1,5 +1,7 @@
 using ApartmentReservationWeb.Abstractions;
+using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models;
+using ApartmentReservationWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,27 +10,43 @@ namespace ApartmentReservationWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IApartmentRepository _apartmentRepository;
+        private readonly ApartmentService _apartmentService;
+        private readonly UserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, IApartmentRepository apartmentRepository)
+        public HomeController(ILogger<HomeController> logger,
+             ApartmentService apartmentService, UserService userService)
         {
             _logger = logger;
-            _apartmentRepository = apartmentRepository;
+            _apartmentService = apartmentService;
+            _userService = userService;
         }
 
+        [HttpPost]
+        public IActionResult Login([Bind("Phone, Password")] LoginDto loginDto)
+        {
+            var userId = _userService.CheckUser(loginDto, out int? Id);
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Main()
         {
-               return View();
+            return View();
         }
 
-        public IActionResult MyApartments(int id = 0)
+        [HttpGet]
+        public IActionResult MyApartments([FromBody] int? id = null)
         {
-            ViewData["apartmentsList"] = _apartmentRepository.GetApartmentsByOwner(id);
+            if (id == null)
+                View();
+
+            ViewData["apartmentsList"] = _apartmentService.GetApartmentsByOwnerId(id);
             return View();
         }
 

@@ -1,8 +1,12 @@
 using ApartmentReservationWeb.Abstractions;
 using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Mapper;
+using ApartmentReservationWeb.RSATools;
 using ApartmentReservationWeb.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +17,33 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please anter token",
+        Name = "Autorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "Token",
+        Scheme = "bearer"
+    });
+
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string []{ }
+        }
+    });
+});
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 
@@ -28,6 +58,21 @@ builder.Services.AddTransient<ApartmentService>();
 
 builder.Services.AddTransient<IDateRepository, DateRepository>();
 builder.Services.AddTransient<DateService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new RsaSecurityKey(RSAExtensions.GetPublicKey())
+        };
+    });
 
 var app = builder.Build();
 
@@ -49,7 +94,6 @@ if (true)
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Login}/{id?}");
-
 }
 
 app.UseHttpsRedirection();

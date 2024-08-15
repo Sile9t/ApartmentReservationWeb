@@ -1,29 +1,25 @@
-﻿@model ApartmentReservationWeb.Models.UserModel.User
+﻿@model ApartmentReservationWeb.Dtos.UserDto
 
 @{
-    ViewData["Title"] = "Login Page";
 }
 
 <div class="login container justify-content-center align-items-center d-flex">
-    <form asp-controller="Home" asp-action="Main">
+    <form asp-controller="User" asp-action="Register">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Phone" class="control-label"></label>
-            <input asp-for="Phone" class="form-control"/>
+            <input asp-for="Phone" class="form-control" />
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Password" class="control-label"></label>
-            <input asp-for="Password" class="form-control"/>
+            <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div class="form-group justify-content-center d-flex">
-            <input type="submit" class="btn btn-primary" value="Submit"/>
+            <input type="submit" class="btn btn-primary" value="Submit" />
         </div>
-        <br/>
-        <a class="text-dark" asp-controller="User" asp-action="Register">Register</a>
-        <a class="text-dark text-decoration-underline" asp-controller="User" asp-action="UpdatePassword">Forgot your password?</a>
     </form>
 </div>

@@ -1,6 +1,4 @@
-﻿using ApartmentReservationWeb.Models.UserModel;
-
-namespace ApartmentReservationWeb.Abstractions
+﻿namespace ApartmentReservationWeb.Models.UserModel
 {
     public class Role
     {
