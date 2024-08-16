@@ -1,12 +1,17 @@
 ﻿using ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel;
 using ApartmentReservationWeb.Models.ApartmentModel;
 using ApartmentReservationWeb.Models.UserModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApartmentReservationWeb.Dtos
 {
     public class ReservationDateDto
     {
-        public DateOnly Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
+        public double? Cost { get; set; }
+        [Display(Name = "Extra Charge")]
+        public double ExtraCharge { get; set; }
         public virtual int ApartmentId { get; set; }
         public virtual ApartmentInfo Apartment { get; set; }
         public virtual int ReservedById { get; set; }
@@ -15,7 +20,5 @@ namespace ApartmentReservationWeb.Dtos
         public virtual Occupancy Occupancy { get; set; }
         public virtual int StateId { get; set; }
         public virtual OccupancyState State { get; set; }
-        public double Cost { get; set; }
-        public double ExtraCharge { get; set; }
     }
 }

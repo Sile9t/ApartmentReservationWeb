@@ -6,6 +6,7 @@
 
 <div class="login container justify-content-center align-items-center d-flex">
     <form asp-controller="Home" asp-action="Main">
+        <input type="hidden" name="ReturnUrl" value="@ViewData["ReturnUrl"]" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Phone" class="control-label"></label>

@@ -6,7 +6,7 @@ namespace ApartmentReservationWeb.RSATools
     {
         public static RSA GetPrivateKey()
         {
-            var key = File.ReadAllText(@"../Keys/private_key.pem");
+            var key = File.ReadAllText(@"../ApartmentReservationWeb/Keys/private_key.pem");
             var rsa = RSA.Create();
 
             rsa.ImportFromPem(key);
@@ -16,7 +16,7 @@ namespace ApartmentReservationWeb.RSATools
 
         public static RSA GetPublicKey()
         {
-            var key = File.ReadAllText(@"../Keys/public_key.pem");
+            var key = File.ReadAllText(@"../ApartmentReservationWeb/Keys/public_key.pem");
             var rsa = RSA.Create();
 
             rsa.ImportFromPem(key);

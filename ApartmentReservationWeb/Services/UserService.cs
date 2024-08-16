@@ -12,7 +12,7 @@ namespace ApartmentReservationWeb.Services
     {
         private readonly IUserRepository _repository;
         private readonly IConfiguration _configuration;
-        
+
         public UserService(IUserRepository repository, IConfiguration configuration)
         {
             _repository = repository;

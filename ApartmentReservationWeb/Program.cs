@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,8 +94,16 @@ if (true)
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Login}/{id?}");
+        pattern: "{controller=Home}/{action=Main}/{id?}");
 }
+
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
+        response.Redirect("/User/Login");
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

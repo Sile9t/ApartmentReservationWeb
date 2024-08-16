@@ -28,7 +28,7 @@
                     @foreach (var date in calendarDates ?? Enumerable.Empty<DateTime>())
                     {
                         if (reservedDates.Any(x => x.ApartmentId == apart.Id 
-                            && x.Date == DateOnly.Parse(date.ToString())))
+                            && x.Date == date))
                         {
                             <td>Reserved</td>
                         }

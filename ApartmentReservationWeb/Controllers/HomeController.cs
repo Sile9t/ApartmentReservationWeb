@@ -22,21 +22,6 @@ namespace ApartmentReservationWeb.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Login([Bind("Phone, Password")] LoginDto loginDto)
-        {
-            var userId = _userService.CheckUser(loginDto, out int? Id);
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Main()
@@ -58,6 +43,7 @@ namespace ApartmentReservationWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
