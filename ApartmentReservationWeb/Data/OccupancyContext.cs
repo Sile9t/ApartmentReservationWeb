@@ -1,24 +1,27 @@
 ﻿using ApartmentReservationWeb.Models.ApartmentModel;
 using ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel;
 using ApartmentReservationWeb.Models.UserModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApartmentReservationWeb.DB
 {
-    public class OccupancyContext : DbContext
+    public class OccupancyContext : IdentityDbContext<User>
     {
         public DbSet<User> Users { get; set; }
         public DbSet<ApartmentInfo> Apartments { get; set; }
         public DbSet<Occupancy> Occupancies { get; set; }
         public DbSet<ReservationDate> ReservationDates { get; set; }
 
-        public OccupancyContext(DbContextOptions<OccupancyContext> optBuilder) 
+        public OccupancyContext(DbContextOptions optBuilder) 
             : base(optBuilder) 
         { }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users");

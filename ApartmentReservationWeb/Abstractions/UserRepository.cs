@@ -19,9 +19,9 @@ namespace ApartmentReservationWeb.Abstractions
             _cache = cache;
         }
 
-        public int AddUser(UserDto userDto)
+        public string AddUser(UserDto userDto)
         {
-            if (_context.Users.Any(x => x.Phone == userDto.Phone))
+            if (_context.Users.Any(x => x.PhoneNumber == userDto.PhoneNumber))
                 throw new Exception("User is already exist!");
 
             var entity = _mapper.Map<User>(userDto);
@@ -30,9 +30,9 @@ namespace ApartmentReservationWeb.Abstractions
             return entity.Id;
         }
 
-        public RoleId CheckUser(LoginDto loginDto, out int? Id)
+        public RoleId CheckUser(LoginDto loginDto, out string? Id)
         {
-            if (!_context.Users.Any(x => x.Phone == loginDto.Phone))
+            if (!_context.Users.Any(x => x.PhoneNumber == loginDto.PhoneNumber))
                 throw new Exception("No user like this!");
 
             var user = _context.Users.FirstOrDefault(_mapper.Map<User>(loginDto));
@@ -45,7 +45,7 @@ namespace ApartmentReservationWeb.Abstractions
             return user.RoleId;
         }
 
-        public UserDto GetUser(int id)
+        public UserDto GetUser(string id)
         {
             if (!_context.Users.Any(x => x.Id == id))
                 throw new Exception("User doesn't exists!");
@@ -58,7 +58,7 @@ namespace ApartmentReservationWeb.Abstractions
             return userDto;
         }
 
-        public UserDto RemoveUser(int id)
+        public UserDto RemoveUser(string id)
         {
             if (!_context.Users.Any(x => x.Id == id))
                 throw new Exception("User doesn't exists!");
@@ -71,9 +71,9 @@ namespace ApartmentReservationWeb.Abstractions
             return _mapper.Map<UserDto>(user);
         }
 
-        public int UpdateUser(UserDto userDto)
+        public string UpdateUser(UserDto userDto)
         {
-            if (!_context.Users.Any(x => x.Phone == userDto.Phone))
+            if (!_context.Users.Any(x => x.PhoneNumber == userDto.PhoneNumber))
                 throw new Exception("User doesn't exists!");
 
             var entity = _mapper.Map<User>(userDto);

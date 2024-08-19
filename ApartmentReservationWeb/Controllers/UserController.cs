@@ -1,4 +1,5 @@
 ﻿using ApartmentReservationWeb.Dtos;
+using ApartmentReservationWeb.Models.UserModel;
 using ApartmentReservationWeb.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace ApartmentReservationWeb.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register([Bind("ReturnUrl")] string? ReturnUrl)
+        public IActionResult Register([Bind("ReturnUrl")] string? ReturnUrl = null)
         {
             if (!String.IsNullOrEmpty(ReturnUrl))
                 ViewData["ReturnUrl"] = ReturnUrl;
@@ -27,27 +28,29 @@ namespace ApartmentReservationWeb.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Register([FromForm] UserDto userDto, [Bind("ReturnUrl")] string? ReturnUrl)
+        public IActionResult Register([FromForm] RegisterModel registerModel,
+             [Bind("ReturnUrl")] string? ReturnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                _userService.AddUser(userDto);
+                _userService.AddUser(registerModel);
 
                 if (!String.IsNullOrEmpty(ReturnUrl))
                     return Redirect(ReturnUrl);
                 else
                     return RedirectToAction("Main", "Home");
             }
-            return View(userDto);
+            return View(registerModel);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login([Bind("Phone, Password")] LoginDto loginDto, [Bind("ReturnUrl")] string? ReturnUrl)
+        public IActionResult Login([FromForm] LoginDto loginDto,
+             [Bind("ReturnUrl")] string? ReturnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                var userId = _userService.CheckUser(loginDto, out int? Id);
+                var userId = _userService.CheckUser(loginDto, out string? Id);
 
                 if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                 {
@@ -61,7 +64,7 @@ namespace ApartmentReservationWeb.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login(string? ResurnUrl = null)
+        public IActionResult Login([Bind("ReturnUrl")]string? ResurnUrl = null)
         {
             if (!String.IsNullOrEmpty(ResurnUrl))
                 ViewData["ReturnUrl"] = ResurnUrl;

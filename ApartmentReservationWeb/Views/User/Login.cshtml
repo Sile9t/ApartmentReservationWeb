@@ -1,4 +1,4 @@
-﻿@model ApartmentReservationWeb.Models.UserModel.User
+﻿@model ApartmentReservationWeb.Dtos.LoginDto
 
 @{
     ViewData["Title"] = "Login Page";
@@ -9,9 +9,9 @@
         <input type="hidden" name="ReturnUrl" value="@ViewData["ReturnUrl"]" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Phone" class="control-label"></label>
-            <input asp-for="Phone" class="form-control"/>
-            <span asp-validation-for="Phone" class="text-danger"></span>
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <input asp-for="PhoneNumber" class="form-control"/>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Password" class="control-label"></label>
@@ -25,6 +25,7 @@
         </div>
         <br/>
         <a class="text-dark" asp-controller="User" asp-action="Register">Register</a>
+        <label>     </label>
         <a class="text-dark text-decoration-underline" asp-controller="User" asp-action="UpdatePassword">Forgot your password?</a>
     </form>
 </div>

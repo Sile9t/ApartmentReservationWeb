@@ -4,10 +4,13 @@ namespace ApartmentReservationWeb.Dtos
 {
     public class LoginDto
     {
-        public int? Id { get; set; }
+        public string? Id { get; set; }
+        [Required]
         [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }
+        [Display(Name = "Phone Number")]
+        public string? PhoneNumber { get; set; }
+        [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }

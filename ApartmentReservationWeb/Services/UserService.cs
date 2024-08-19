@@ -2,6 +2,7 @@
 using ApartmentReservationWeb.Dtos;
 using ApartmentReservationWeb.Models.UserModel;
 using ApartmentReservationWeb.RSATools;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -12,6 +13,7 @@ namespace ApartmentReservationWeb.Services
     {
         private readonly IUserRepository _repository;
         private readonly IConfiguration _configuration;
+        private readonly UserManager<User> _userManager;
 
         public UserService(IUserRepository repository, IConfiguration configuration)
         {
@@ -21,27 +23,29 @@ namespace ApartmentReservationWeb.Services
 
         //To do: AddAdmin(LoginDto), AddUser(LoginDto), UpdateToken(UserDto)
 
-        public int AddUser(UserDto userDto)
+        public User AddUser(RegisterModel registerModel)
         {
-            return _repository.AddUser(userDto);
+            registerModel.UserName = registerModel.UserName + registerModel.PhoneNumber;
+
+            return _userManager.FindByNameAsync(registerModel.UserName).Result;
         }
 
         public UserDto GetUserByPhone(string phone)
         {
-            return _repository.GetUser(0);
+            return _repository.GetUser("");
         }
 
-        public UserDto RemoveUser(int id)
+        public UserDto RemoveUser(string id)
         {
             return _repository.RemoveUser(id);
         }
 
-        public int UpdateUser(UserDto userDto)
+        public string UpdateUser(UserDto userDto)
         {
             return _repository.UpdateUser(userDto);
         }
 
-        public RoleId CheckUser(LoginDto loginDto, out int? Id)
+        public RoleId CheckUser(LoginDto loginDto, out string? Id)
         {
             return _repository.CheckUser(loginDto, out Id);
         }
@@ -56,7 +60,7 @@ namespace ApartmentReservationWeb.Services
                  SecurityAlgorithms.RsaSha512Signature);
             var claims = new[]
             {
-                new Claim(ClaimTypes.MobilePhone, userDto.Phone),
+                new Claim(ClaimTypes.MobilePhone, userDto.PhoneNumber),
                 new Claim(ClaimTypes.Role, userDto.Role.ToString())
             };
 

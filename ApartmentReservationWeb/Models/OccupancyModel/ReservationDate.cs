@@ -10,16 +10,16 @@ namespace ApartmentReservationWeb.Models.ApartmentModel
         public int Id { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        [Column(TypeName = "double(18, 2)")]
+        [Column(TypeName = "decimal(18, 2)")]
         public double? Cost { get; set; }
-        [Column(TypeName = "double(18, 2)")]
+        [Column(TypeName = "float(18, 2)")]
         public double? ExtraCharge { get; set; }
         [Required]
         public virtual int ApartmentId { get; set; }
         [Required]
         public virtual ApartmentInfo Apartment { get; set; }
         [Required]
-        public virtual int ReservedById { get; set; }
+        public virtual Guid ReservedById { get; set; }
         [Required]
         public virtual User ReservedBy { get; set; }
         public virtual int? OccupancyId { get; set; }

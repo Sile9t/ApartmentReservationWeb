@@ -14,7 +14,7 @@ namespace ApartmentReservationWeb.Dtos
         public double ExtraCharge { get; set; }
         public virtual int ApartmentId { get; set; }
         public virtual ApartmentInfo Apartment { get; set; }
-        public virtual int ReservedById { get; set; }
+        public virtual string ReservedById { get; set; }
         public virtual User ReservedBy { get; set; }
         public virtual int OccupancyId { get; set; }
         public virtual Occupancy Occupancy { get; set; }

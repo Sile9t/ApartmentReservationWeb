@@ -1,11 +1,13 @@
 ﻿using ApartmentReservationWeb.Models.ApartmentModel;
 using ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApartmentReservationWeb.Models.UserModel
 {
-    public class User
+    public class User : IdentityUser
     {
+        /* Inherited from IdentityUser
         public int Id { get; set; }
         [Required]
         [MinLength(3)]
@@ -22,7 +24,8 @@ namespace ApartmentReservationWeb.Models.UserModel
         [DataType(DataType.Password)]
         [MinLength(8)]
         public byte[] Password { get; set; }
-        public byte[] Salt { get; set; }
+        public byte[] Salt { get; set; }*/
+        public DateTime BirthDate { get; set; }
         public string? About { get; set; }
         public string? Languages { get; set; }
         public byte[]? Photo { get; set; }

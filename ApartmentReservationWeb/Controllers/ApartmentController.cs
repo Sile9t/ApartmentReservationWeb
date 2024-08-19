@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApartmentReservationWeb.Controllers
 {
-    public class ApartmentsController : Controller
+    public class ApartmentController : Controller
     {
-        private readonly ILogger<ApartmentsController> _logger;
+        private readonly ILogger<ApartmentController> _logger;
         private readonly IApartmentRepository _repository;
 
-        public ApartmentsController(ILogger<ApartmentsController> logger, IApartmentRepository repository)
+        public ApartmentController(ILogger<ApartmentController> logger, IApartmentRepository repository)
         {
             _logger = logger;
             _repository = repository;

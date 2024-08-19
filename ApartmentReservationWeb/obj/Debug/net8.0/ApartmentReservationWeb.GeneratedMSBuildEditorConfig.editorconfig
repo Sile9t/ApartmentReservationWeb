@@ -18,8 +18,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Projects\DotNet\Web\ApartmentReservationWeb\ApartmentReservationWeb
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Projects/DotNet/Web/ApartmentReservationWeb/ApartmentReservationWeb/Views/Apartments/Main.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBhcnRtZW50c1xNYWluLmNzaHRtbA==
+[C:/Projects/DotNet/Web/ApartmentReservationWeb/ApartmentReservationWeb/Views/Apartment/Main.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBhcnRtZW50XE1haW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/DotNet/Web/ApartmentReservationWeb/ApartmentReservationWeb/Views/Calendar/Main.cshtml]

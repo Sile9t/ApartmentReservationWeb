@@ -41,7 +41,7 @@ namespace ApartmentReservationWeb.Services
             return occupancy;
         }
 
-        public IEnumerable<Occupancy> GetOccupancies(int ownerId)
+        public IEnumerable<Occupancy> GetOccupancies(string ownerId)
         {
             var list = _context.Occupancies.Select(_mapper.Map<Occupancy>)
                 .Where(x => x.Apartment.OwnerId == ownerId).ToList();

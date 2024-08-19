@@ -31,7 +31,7 @@ namespace ApartmentReservationWeb.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult MyApartments([FromBody] int? id = null)
+        public IActionResult MyApartments([FromBody] string? id = null)
         {
             ViewData["apartmentsList"] = _apartmentService.GetApartmentsByOwnerId(id);
             return View();

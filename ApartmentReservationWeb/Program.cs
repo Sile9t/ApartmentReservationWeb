@@ -1,10 +1,13 @@
 using ApartmentReservationWeb.Abstractions;
 using ApartmentReservationWeb.DB;
 using ApartmentReservationWeb.Mapper;
+using ApartmentReservationWeb.Models.UserModel;
 using ApartmentReservationWeb.RSATools;
 using ApartmentReservationWeb.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Net;
@@ -49,7 +52,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddMemoryCache(x => x.TrackStatistics = true);
 
 builder.Services.AddDbContext<OccupancyContext>(options => options.UseSqlServer(
-    dbConnect).UseLazyLoadingProxies().LogTo(Console.WriteLine));
+    dbConnect/*, o => o.UseCompatibilityLevel(160)*/).UseLazyLoadingProxies().LogTo(Console.WriteLine));
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<UserService>();
@@ -59,6 +62,18 @@ builder.Services.AddTransient<ApartmentService>();
 
 builder.Services.AddTransient<IDateRepository, DateRepository>();
 builder.Services.AddTransient<DateService>();
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 10;
+    options.User.RequireUniqueEmail = true;
+})
+    .AddEntityFrameworkStores<OccupancyContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -82,13 +97,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 if (true)
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    //app.UseExceptionHandler("/Home/Error");
+    //// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    //app.UseHsts();
 
     app.UseRouting();
 
@@ -108,6 +124,7 @@ app.UseStatusCodePages(async context =>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

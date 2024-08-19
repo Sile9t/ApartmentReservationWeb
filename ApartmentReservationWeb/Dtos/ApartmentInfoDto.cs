@@ -27,7 +27,7 @@ namespace ApartmentReservationWeb.Dtos
         public double Cost { get; set; }
         public double? Rate { get; set; }
         public virtual int? RulesId { get; set; }
-        public virtual int OwnerId { get; set; }
+        public virtual string OwnerId { get; set; }
         public virtual int? HotelId { get; set; }
         public virtual int? FacilitiesInfoId { get; set; }
     }

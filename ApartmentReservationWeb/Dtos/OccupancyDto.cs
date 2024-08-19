@@ -17,7 +17,7 @@ namespace ApartmentReservationWeb.Dtos
         [Display(Name = "Total Cost")]
         public double TotalCost { get; set; }
         public virtual int ApartmentId { get; set; }
-        public virtual int ReservedById { get; set; }
+        public virtual string ReservedById { get; set; }
         public virtual int OccupancyStateId { get; set; }
         public virtual int ReviewId { get; set; }
     }

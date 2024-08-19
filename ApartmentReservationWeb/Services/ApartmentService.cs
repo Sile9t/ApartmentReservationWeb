@@ -30,7 +30,7 @@ namespace ApartmentReservationWeb.Services
             return _repository.RemoveApartment(id);
         }
 
-        public IEnumerable<ApartmentInfo> GetApartmentsByOwnerId(int? id)
+        public IEnumerable<ApartmentInfo> GetApartmentsByOwnerId(string? id)
         {
             if (id == null) return Enumerable.Empty<ApartmentInfo>();
 

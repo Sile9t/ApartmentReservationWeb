@@ -24,17 +24,17 @@ namespace ApartmentReservationWeb.Models.ApartmentModel
         public int RoomsCount { get; set; }
         public string? Description { get; set; }
         [Required]
-        [Column(TypeName = "double(18, 2)")]
+        [Column(TypeName = "float(18, 2)")]
         public double Cost { get; set; }
         [Required]
         [Display(Name = "Extra Cost")]
-        [Column(TypeName = "double(18, 2)")]
+        [Column(TypeName = "float(18, 2)")]
         public double? ExtraCost { get; set; }
         public double? Rate { get; set; }
         public virtual List<Review>? Reviews { get; set; }
         public virtual int? RulesId { get; set; }
         public virtual ApartmentRules? Rule { get; set; }
-        public virtual int OwnerId { get; set; }
+        public virtual string OwnerId { get; set; }
         public virtual User Owner { get; set; }
         public virtual int? HotelId { get; set; }
         public virtual HotelInfo? Hotel { get; set; }

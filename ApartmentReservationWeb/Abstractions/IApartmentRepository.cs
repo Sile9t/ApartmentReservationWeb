@@ -8,7 +8,7 @@ namespace ApartmentReservationWeb.Abstractions
         int AddApartment(ApartmentInfoDto apartmentInfoDto);
         ApartmentInfo GetApartmentById(int id);
         IEnumerable<ApartmentInfo> GetAllApartments();
-        IEnumerable<ApartmentInfo> GetApartmentsByOwnerId(int? id);
+        IEnumerable<ApartmentInfo> GetApartmentsByOwnerId(string? id);
         ApartmentInfo RemoveApartment(int id);
     }
 }

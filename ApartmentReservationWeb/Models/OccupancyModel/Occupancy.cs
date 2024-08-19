@@ -15,11 +15,11 @@ namespace ApartmentReservationWeb.Models.ApartmentModel.OccupancyModel
         [Required]
         public int GuestesCount { get; set; }
         [Required]
-        [Column(TypeName = "double(18, 2)")]
+        [Column(TypeName = "float(18, 2)")]
         public double TotalCost { get; set; }
         public virtual int ApartmentId { get; set; }
         public virtual ApartmentInfo Apartment { get; set; }
-        public virtual int ReservedById { get; set; }
+        public virtual string ReservedById { get; set; }
         public virtual User ReservedBy { get; set; }
         public virtual int? OccupancyStateId { get; set; }
         public virtual OccupancyState? State { get; set; }
